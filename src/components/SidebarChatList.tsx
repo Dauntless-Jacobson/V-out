@@ -35,16 +35,16 @@ const SidebarChatList: FC<SidebarChatListProps> = ({ friends, sessionId }) => {
     const chatHandler = (message: ExtendedMessage) => {
       const shouldNotify =
         pathname !==
-        `/dashboard/chat/${chatHrefConstructor(sessionId, message.SenderId)}`;
+        `/dashboard/chat/${chatHrefConstructor(sessionId, message.senderId)}`;
 
       if (!shouldNotify) return;
-
+      console.log(message);
       // should be notified
       toast.custom((t) => (
         <UnseenChatToast
           t={t}
           sessionId={sessionId}
-          senderId={message.SenderId}
+          senderId={message.senderId}
           senderImg={message.senderImg}
           senderMessage={message.text}
           senderName={message.senderName}
@@ -69,7 +69,7 @@ const SidebarChatList: FC<SidebarChatListProps> = ({ friends, sessionId }) => {
   useEffect(() => {
     if (pathname?.includes("chat")) {
       setUnseenMessages((prev) => {
-        return prev.filter((msg) => !pathname.includes(msg.SenderId));
+        return prev.filter((msg) => !pathname.includes(msg.senderId));
       });
     }
   }, [pathname]);
@@ -78,7 +78,7 @@ const SidebarChatList: FC<SidebarChatListProps> = ({ friends, sessionId }) => {
     <ul role="list" className="max-h-[25rem] overflow-y-auto -mx-2 space-y-1">
       {activeChats.sort().map((friend) => {
         const unseenMessagesCount = unseenMessages.filter((unseenMsg) => {
-          return unseenMsg.SenderId === friend.id;
+          return unseenMsg.senderId === friend.id;
         }).length;
 
         return (

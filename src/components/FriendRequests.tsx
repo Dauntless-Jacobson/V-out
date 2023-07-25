@@ -23,9 +23,9 @@ const FriendRequests: FC<FriendRequestsProps> = ({
 
   useEffect(() => {
     pusherClient.subscribe(
-      toPusherkey(`user:${sessionId}:incoming_friend_requests`)
+      toPusherkey(`user:${sessionId}:incoming_friendRequests`)
     );
-    console.log("listening to ", `user:${sessionId}:incoming_friend_requests`);
+    console.log("listening to ", `user:${sessionId}:incoming_friendRequests`);
 
     const friendRequestHandler = ({
       senderId,
@@ -35,13 +35,13 @@ const FriendRequests: FC<FriendRequestsProps> = ({
       setFriendRequests((prev) => [...prev, { senderId, senderEmail }]);
     };
 
-    pusherClient.bind("incoming_friend_requests", friendRequestHandler);
+    pusherClient.bind("incoming_friendRequests", friendRequestHandler);
 
     return () => {
       pusherClient.unsubscribe(
-        toPusherkey(`user:${sessionId}:incoming_friend_requests`)
+        toPusherkey(`user:${sessionId}:incoming_friendRequests`)
       );
-      pusherClient.unbind("incoming_friend_requests", friendRequestHandler);
+      pusherClient.unbind("incoming_friendRequests", friendRequestHandler);
     };
   }, [sessionId]);
 
@@ -97,5 +97,3 @@ const FriendRequests: FC<FriendRequestsProps> = ({
 };
 
 export default FriendRequests;
-
-//coment

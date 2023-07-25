@@ -49,7 +49,7 @@ const page = async ({ params }: PageProps) => {
   const chatPartnerId = user.id === userid1 ? userid2 : userid1;
   const chatPartner = (await db.get(`user:${chatPartnerId}`)) as User;
   const initialMessages = await getChatMessages(chatId);
-
+  console.log(chatPartner);
   return (
     <div className="flex-1 justify-between flex flex-col h-full mx-h-[cacl(100vh-6rem)]">
       <div className="flex sm:items-center justify-between py-3 border-b-2 border-gray-200">

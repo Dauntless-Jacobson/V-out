@@ -11,7 +11,7 @@ interface Chat {
 
 interface Message {
   id: string;
-  SenderId: string;
+  senderId: string;
   receiverId: string;
   text: string;
   timestamp: number;
